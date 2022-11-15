@@ -1,0 +1,37 @@
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { LaptopsService } from './laptops.service';
+import { CreateLaptopDto } from './dto/create-laptop.dto';
+import { UpdateLaptopDto } from './dto/update-laptop.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+
+@Controller('laptops')
+export class LaptopsController {
+  constructor(private readonly laptopsService: LaptopsService) {}
+
+  @Post()
+  @UseInterceptors(FileInterceptor('file'))
+  async create(@UploadedFile() file) {
+    console.log(file)
+    // return this.laptopsService.create(data);
+  }
+
+  @Get()
+  findAll() {
+    return this.laptopsService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.laptopsService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateLaptopDto: UpdateLaptopDto) {
+    return this.laptopsService.update(+id, updateLaptopDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.laptopsService.remove(+id);
+  }
+}
