@@ -49,6 +49,11 @@ async create(data) {
 
   search(params){
     //for search laptops
-    
+    let laptops;
+    try {
+      console.log(params)
+    }catch(error){
+      throw new Error("erreur lors de la recherche des laptops")
+    }
   }
 }
