@@ -12,7 +12,7 @@ export class LaptopsService {
 async create(data) {
     let newLaptop;
     try {
-      newLaptop=await new this.LaptopSchema(data);
+      newLaptop= await new this.LaptopSchema(data);
       await newLaptop.save();
     } catch (error) {
       throw new Error("erreur lors de l'enregistrement")
@@ -20,8 +20,20 @@ async create(data) {
     return `laptop enregistrer avec success ${newLaptop.id}`;
   }
 
-  findAll() {
-    return `This action returns all laptops`;
+  async findAll() {
+    let laptops;
+    try {
+      laptops= await this.LaptopSchema.find({
+        take:100,
+        skip:0
+      })
+    } catch (error) {
+      throw new Error("erreur lors de la recuperation des donnees"); 
+    }
+    if(!laptops){
+      throw new Error("aucun laptop n'a ete trouver")
+    }
+    return laptops;
   }
 
   findOne(id: number) {
