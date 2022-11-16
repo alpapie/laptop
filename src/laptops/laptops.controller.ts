@@ -32,16 +32,16 @@ export class LaptopsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.laptopsService.findOne(+id);
+    return this.laptopsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLaptopDto: UpdateLaptopDto) {
-    return this.laptopsService.update(+id, updateLaptopDto);
+  update(@Param('id') id: string) {
+    return this.laptopsService.update(id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.laptopsService.remove(+id);
+    return this.laptopsService.remove(id);
   }
 }

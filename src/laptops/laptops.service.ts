@@ -24,9 +24,8 @@ async create(data) {
     let laptops;
     try {
       laptops= await this.LaptopSchema.find({
-        take:100,
-        skip:0
-      })
+        brand:"Apple"
+      }).skip(10).limit(100)
     } catch (error) {
       throw new Error("erreur lors de la recuperation des donnees"); 
     }
@@ -36,15 +35,20 @@ async create(data) {
     return laptops;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} laptop`;
   }
 
-  update(id: number, updateLaptopDto: UpdateLaptopDto) {
+  update(id:string) {
     return `This action updates a #${id} laptop`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} laptop`;
+  }
+
+  search(params){
+    //for search laptops
+    
   }
 }
