@@ -44,4 +44,9 @@ export class LaptopsController {
   remove(@Param('id') id: string) {
     return this.laptopsService.remove(id);
   }
-}
+
+  @Post('/filter')
+  async filter(@Body() param){
+    return await this.laptopsService.filter(param)
+  }
+} 

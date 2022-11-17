@@ -47,13 +47,14 @@ async create(data) {
     return `This action removes a #${id} laptop`;
   }
 
-  search(params){
+ async filter(params){
     //for search laptops
     let laptops;
     try {
-      console.log(params)
+    laptops= await this.LaptopSchema.find(params).limit(100)
     }catch(error){
       throw new Error("erreur lors de la recherche des laptops")
     }
+    return laptops
   }
 }
